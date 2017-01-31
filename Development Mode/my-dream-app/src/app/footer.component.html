@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<!-- 
+  Created on : Dec 23, 2016
+  Author     : vyadav
+-->
+<style>
+    .rbutton {
+        background-color: white;
+        border: 2px solid #008CBA;
+        color: black;
+        padding: 5px 5px 5px 5px;
+        text-align: center;
+        width: 100px;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 14px;
+        margin: 4px 2px;
+        -webkit-transition-duration: 0.4s;
+        /* Safari */
+        transition-duration: 0.4s;
+        cursor: pointer;
+    }
+    
+    .rbutton:hover {
+        background-color: #008CBA;
+        color: white;
+    }
+        .cbutton {
+        background-color: white;
+        border: 2px solid #f44336;
+        color: black;
+        padding: 5px 5px 5px 5px;
+        text-align: center;
+        width: 100px;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 14px;
+        margin: 4px 2px;
+        -webkit-transition-duration: 0.4s;
+        /* Safari */
+        transition-duration: 0.4s;
+        cursor: pointer;
+    }
+    
+    .cbutton:hover {
+        background-color: #f44336;
+        color: white;
+    }
+.foot{
+    padding-top: 50px;
+}
+</style>
+<div class="container fluid foot">
+    <div class="row">
+        <hr>
+        <div class="col-sm-10">
+            <a href=""><h4>VY_Company ©2017</h4></a>
+            <h6>Code Review Management System</h6>
+        </div>
+        <div  class="col-sm-2">
+            <h6 data-toggle="modal" data-target="#fdbck" class="handy">Suggest improvements/ Report bugs <span class="glyphicon glyphicon-tags"></span></h6>
+        </div>        
+    </div>
+</div>
+<div class="modal fade" id="fdbck" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Feedback Form</h4>
+            </div>
+            <div class="modal-body">
+                <p>Place you suggestion here:</p>
+                <form (ngSubmit)="onFeedback();">
+                    <label for="fdn">Name</label><br>
+                    <input name="fdn" class="form-control" type="text" placeholder="Name" [(ngModel)]="feedback.name" required><br>
+                    <label for="fdm">Suggestion (or) Issue</label><br>
+                    <textarea name="fdm" class="form-control" rows="9" cols="80" [(ngModel)]="feedback.view" placeholder="Report Here"></textarea><br>
+                    <button class="rbutton" type="submit">Submit</button>
+                    <button class="cbutton" (click)="onCancelFDB();">Cancel</button><br>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

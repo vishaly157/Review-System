@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<!-- 
+  Created on : Dec 23, 2016
+  Author     : vyadav
+-->
+<style>
+.overlay {
+    height: 0%;
+    width: 100%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0, 0.9);
+    overflow-y: hidden;
+    transition: 0.5s;
+    color: #ddd;
+}
+
+textarea{
+    color: #000;
+    background-color: #f1f1f1;
+}
+
+.overlay-content {
+    position: relative;
+    top: 10%;
+    width: 100%;
+    margin-top: 30px;
+}
+
+.overlay a {
+    padding: 8px;
+    text-decoration: none;
+    font-size: 36px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.overlay a:hover, .overlay a:focus {
+    color: #f1f1f1;
+}
+
+.overlay .closebtn {
+    position: absolute;
+    top: 20px;
+    right: 45px;
+    font-size: 60px;
+}
+
+@media screen and (max-height: 450px) {
+  .overlay {overflow-y: auto;}
+  .overlay a {font-size: 20px}
+  .overlay .closebtn {
+    font-size: 40px;
+    top: 15px;
+    right: 35px;
+  }
+}
+
+.sinput[type=text] {
+    width: 500px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: white;
+    background-image: url('searchicon.png');
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 5px 5px 5px 5px;
+}
+
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+    width: "200px";
+}
+
+.button1 {
+    background-color: white; 
+    color: black; 
+    border: 2px solid #4CAF50;
+}
+
+.button1:hover {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.button2 {
+    background-color: white; 
+    color: black; 
+    border: 2px solid #008CBA;
+}
+
+.button2:hover {
+    background-color: #008CBA;
+    color: white;
+}
+</style>
+        <div id="OverlayE" class="overlay">
+            
+<div class="overlay-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3"><h3>Story</h3><h4>{{tfield.Technology}}</h4></div>
+            <div class="col-sm-3"><h3>Created By</h3><h4>{{tfield.Name}}</h4></div>
+            <div class="col-sm-3"><h3>Dated</h3><h4>{{tfield.Date_of_Request}}</h4></div>
+            <div class="col-sm-3"><h3>Review</h3><h4>{{tfield.Reviewed}}</h4></div>
+        </div>
+        <div class="row" style="text-align: center">
+            <hr>
+            <textarea disabled rows="10" cols="150" style="display: inline-block;">{{tfield.Comments}}</textarea>
+            <hr>
+        </div>
+        <div class="row handy">
+            <h2 class="col-sm-11" (click)="closed()" style="color: darkred">Close</h2>
+        </div>
+    </div>
+
+</div>
+</div>
+
+<div class="container-fluid" style="padding-bottom: 60px;">
+    <div class="row">
+    <!--<input class = "sinput" type="text" name="search" placeholder="Search by Story Name..." [(ngModel)]="srcqry" style="color: black;">-->
+    <!--<button class="button button2" (click)="refreshRecs();">Refresh records</button>-->
+    </div>
+    <div class="row">
+    
+    <tetry ></tetry>
+    </div>
+    <div class="container-fluid">
+
+<div class="table-responsive" >
+    <table class="table table-hover">
+         <caption style="color:#eee" class="handy"><h2>Review Statistics <span class="refresh handy" (click)="refreshRecs();" class="glyphicon glyphicon-refresh handy"></span></h2></caption>
+        <thead>
+            <tr>
+                <th>Sr.No.</th>
+                <th>Name</th>
+                <th>Team</th>
+                <th>Story Name</th>
+                <th>Date of Request</th>
+                <th>Reviewer</th>
+                <th>Review Status</th>
+                <th>Reviewed Date</th>
+                <th>Edit</th>
+                <!--<th>Del.</th>-->
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let field of (fields | dataPipe); let i=index">
+                <td >{{i+1}}</td>
+                <td (click)="showComment(field)" class="handy"><b>{{field.Name}}</b></td>
+                <td>{{field.Team}}</td>
+                <td (click)="ifadmin(field);"><u>{{field.Technology}}</u></td>
+                <td>{{field.Date_of_Request}}</td>
+                <td>{{field.Reviewer}}</td>
+                <td>{{field.Reviewed}}</td>
+                <td>{{field.Date_of_Review}}</td>
+                <td (click)="add(field)"><div ><span class="glyphicon glyphicon-pencil handy" style="color: #ccc;"></span></div></td>
+                <!--<td><span class="glyphicon glyphicon-remove handy" style="color: darkred;"></span></td>-->
+            </tr>
+        </tbody>
+    </table>
+</div>
+</div>
+</div>
+
+<div class="modal fade" id="Update" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Update</h4>
+        </div>
+        <div class="modal-body">
+          <br>
+          <button class="button button1" style="width:100%" (click)="addCom();">Add Comment</button><br>
+          <br>
+          <button class="button button2" style="width:100%" (click)="doRev();">Done Review</button><br>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="Addcom" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Post a Review Request</h4>
+            </div>
+            <div class="modal-body">
+                <p>Fill in following:</p>
+                <form (ngSubmit)="addingComm();">
+                    <label for="coms">Comment update:</label><br>
+                    <textarea style="background-color: #eee" name="coms" class="form-control" rows="7" cols="70" [(ngModel)]="newCom" placeholder="Enter Here" required></textarea><br>
+                    <button type="submit"  class="button button1">Add</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" (click)="onCancel()">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="ialerting" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">{{dtitle}}</h4>
+        </div>
+        <div class="modal-body">
+          <p>{{dmessage}}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="Admin" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Admin Tasks</h4>
+        </div>
+        <div class="modal-body">
+          <br>
+          <button class="button button1" style="width:100%" (click)="reopenfrm();">Re-Open Story</button><br>
+          <br>
+          <button class="button button2" style="width:100%" (click)="deleteRec();">Delete</button><br>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="Assign" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Post a Review Request</h4>
+            </div>
+            <div class="modal-body">
+                <p>Fill in following:</p>
+                <form (ngSubmit)="reOpen();">
+                        <label for="nrevr">Assign Reviewer</label>
+                        <select name="nrevr" class="form-control" [(ngModel)]="nrev" required placeholder="Assign reveiwer">
+                            <option *ngFor="let user of drpusers" [value]="user.name">{{user.name}}</option>
+                        </select><br>
+                    <button type="submit" class="button button1" >Re-Assign</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        </div>
+        </div>
+    </div>
+</div>

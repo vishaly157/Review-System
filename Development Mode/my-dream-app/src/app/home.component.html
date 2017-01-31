@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<!-- 
+  Created on : Dec 23, 2016
+  Author     : vyadav
+-->
+<style>
+    .rbutton {
+        background-color: white;
+        border: 2px solid #008CBA;
+        color: black;
+        padding: 5px 5px 5px 5px;
+        text-align: center;
+        width: 100px;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 14px;
+        margin: 4px 2px;
+        -webkit-transition-duration: 0.4s;
+        /* Safari */
+        transition-duration: 0.4s;
+        cursor: pointer;
+    }
+    
+    .rbutton:hover {
+        background-color: #008CBA;
+        color: white;
+    }
+        .cbutton {
+        background-color: white;
+        border: 2px solid #f44336;
+        color: black;
+        padding: 5px 5px 5px 5px;
+        text-align: center;
+        width: 100px;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 14px;
+        margin: 4px 2px;
+        -webkit-transition-duration: 0.4s;
+        /* Safari */
+        transition-duration: 0.4s;
+        cursor: pointer;
+    }
+    
+    .cbutton:hover {
+        background-color: #f44336;
+        color: white;
+    }
+
+    #homediv {
+     /*background-color: yellow;*/
+    -webkit-animation-name: example; /* Safari 4.0 - 8.0 */
+    -webkit-animation-duration: 3s; /* Safari 4.0 - 8.0 */
+    animation-name: example;
+    animation-duration: 3s;
+}
+
+/* Safari 4.0 - 8.0 */
+    @-webkit-keyframes example {
+        from {opacity: 0;}
+        to {opacity: 1;}
+    }
+
+    /* Standard syntax */
+    @keyframes example {
+        from {opacity: 0;}
+        to {opacity: 1;}
+    }
+</style>
+<div class="container-fluid" id="homediv">
+    <div class="row">
+        <div class="col-sm-9">
+            <div>
+                <h2>About</h2>
+                <div>
+                    <h4>Welcome to code Review Management System<br>
+                        <ul>
+                            <li>New Users can get registered by requesting access.</li>
+                            <li>Use Login to post or read Code review requests.</li>
+                            <li>Employee ID is considered as user ID.</li>
+                            <li>Once logged in, click on review ID to explore further data.</li>
+                        </ul>
+                    </h4>
+                </div>
+            </div>
+            
+        </div>
+        <div class="col-sm-3">
+            <div>
+                <h3 data-toggle="modal" data-target="#login" class="handy">{{LOGIN()}} <span class="glyphicon glyphicon-log-in"></span></h3>
+            </div>
+            <div>
+                <h3 data-toggle="modal" data-target="#access" class="handy">Request Access</h3>
+            </div>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th colspan="2">
+                            <h3 class="handy">Users <span class="refresh handy" (click)="getUsers();" class="glyphicon glyphicon-refresh"></span></h3>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>Name</th>
+                        <th>Employee ID</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of users">
+                        <td>{{user.name}}</td>
+                        <td>{{user.eID}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="access" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">New User Registration</h4>
+            </div>
+            <div class="modal-body">
+                <p>Fill in following:</p>
+                <form (ngSubmit)="onCreate();">
+                    <label for="eID">Emplyee ID</label><br>
+                    <input name="eID" class="form-control" type="text" placeholder="User ID" [(ngModel)]="dataNU.eID" required><br>
+                    <label for="name">Name</label><br>
+                    <input name="name" class="form-control" type="text" placeholder="Display name" [(ngModel)]="dataNU.name" required><br>
+                    <label for="eml">Email ID</label><br>
+                    <input name="eml" class="form-control" type="text" placeholder="Official Email" [(ngModel)]="dataNU.email" required><br>
+                    <label for="tm">Team</label><br>
+                    <input name="tm" class="form-control" type="text" placeholder="Team" [(ngModel)]="dataNU.team" required><br>
+                    <label for="pwd">New Password</label><br>
+                    <input name="pwd" class="form-control" type="password" placeholder="New Password" [(ngModel)]="dataNU.pass" required><br>
+                    <button class="rbutton" type="submit">Create</button>
+                    <button class="cbutton" (click)="onCancel(2)">Cancel</button><br>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="login" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Login User</h4>
+            </div>
+            <div class="modal-body">
+                <p>Fill in following:</p>
+                <form (ngSubmit)="onLoginRequest();">
+                    <label for="eidL">Employee ID</label><br>
+                    <input name="eidL" class="form-control" type="text" placeholder="User ID" [(ngModel)]="dataLU.eID" required><br>
+                    <label for="epdL">Password</label><br>
+                    <input name="epdL" class="form-control" type="password" placeholder="Password" [(ngModel)]="dataLU.pass" required><br>
+                    <!--<div ><p>{{loginmessagge}}</p><br></div>-->
+                    <button class="rbutton" type="submit">LogIn</button>
+                    <button class="cbutton" (click)="onCancel(1)">Cancel</button><br>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
