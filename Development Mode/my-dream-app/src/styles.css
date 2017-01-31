@@ -1,0 +1,70 @@
+/*
+    My styles!
+*/
+/* 
+    Created on : Dec 23, 2016, 3:32:33 PM
+    Author     : vyadav
+*/
+html,body {
+    background: url('https://www.walldevil.com/wallpapers/w01/519626-android-android-jelly-bean-gaussian-blur-google-minimalistic.jpg') no-repeat center center fixed;
+    /*height: 100%;*/
+    margin: 0px;
+    padding: 0px;
+    /*background: #e5e5e5;*/
+    color: aliceblue;
+}
+body{
+    /*background-image: url('http://www.hdwallpapers.in/walls/blurred_colors-wide.jpg'); */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+#wrapper{
+    /*margin-top: 90px;*/
+    height: 100%;
+    /*background: #e5e5e5;*/
+}
+
+#majorelem{
+    border: #000;
+    border-style: solid;
+    background-color: transparent;
+    width: 100%;
+}
+
+div{
+    padding: 5px 5px 5px 5px;
+}
+
+.handy{
+    cursor: pointer; 
+    cursor: hand;
+}
+
+nav{ 
+    background-color: #000;
+    opacity: 0.9;
+    /*background: url('http://2.bp.blogspot.com/-uqUFuVCcc_U/UzUPpZHuYiI/AAAAAAAADfU/b8PZXWjxH2M/s1600/Talk+with+code+by+PCbots.png') no-repeat center center fixed;*/
+}
+.modal-content{ 
+    /*base*/
+    color: #ddd;
+    background-color: #666;
+    /*background: url('http://objects.chopard.com/media/catalog/category/background_52.jpg') no-repeat center center fixed;*/
+    background-size: cover;
+}
+tr:hover td{
+    color: #000;
+}
+tr:hover b{
+    color: blue;
+}
+
+.handy:hover{
+    color: palegoldenrod;
+}
+
+.handy:active{
+    color: darkgoldenrod;
+}
